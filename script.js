@@ -7,13 +7,10 @@ function getRandInt() {
 function getComputerChoice() {
   let choice = getRandInt();
   if (choice == 0) {
-    console.log("Rock");
     return "Rock";
   } else if (choice == 1) {
-    console.log("Paper");
     return "Paper";
   } else {
-    console.log("Scissors");
     return "Scissors";
   }
 }
