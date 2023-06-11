@@ -28,24 +28,51 @@ function playRound() {
   let playerChoice = getPlayerChoice().toUpperCase();
 
   if (computerChoice == playerChoice) {
-    console.log(
+    return (
       "What a tie! Computer chose " +
-        computerChoice +
-        " and player chose " +
-        playerChoice
+      computerChoice +
+      " and player chose " +
+      playerChoice
     );
   } else if (playerChoice == "ROCK" && computerChoice == "PAPER") {
-    console.log(computerChoice + " beats " + playerChoice + "! Computer wins!");
+    return "Computer wins!";
   } else if (playerChoice == "SCISSORS" && computerChoice == "ROCK") {
-    console.log(computerChoice + " beats " + playerChoice + "! Computer wins!");
+    return "Computer wins!";
   } else if (playerChoice == "PAPER" && computerChoice == "SCISSORS") {
-    console.log(computerChoice + " beats " + playerChoice + "! Computer wins!");
+    return "Computer wins!";
   } else if (playerChoice == "PAPER" && computerChoice == "ROCK") {
-    console.log(playerChoice + " beats " + computerChoice + "! Player wins!");
+    return "Player wins!";
   } else if (playerChoice == "ROCK" && computerChoice == "SCISSORS") {
-    console.log(playerChoice + " beats " + computerChoice + "! Player wins!");
+    return "Player wins!";
   } else if (playerChoice == "SCISSORS" && computerChoice == "PAPER") {
-    console.log(playerChoice + " beats " + computerChoice + "! Player wins!");
+    return "Player wins!";
   }
 }
-playRound();
+
+function playGame() {
+  let roundCounter = 0;
+  let userWins = 0;
+  let computerWins = 0;
+  do {
+    let result = playRound();
+    if (result.includes("Computer wins!")) {
+      computerWins += 1;
+      roundCounter += 1;
+      console.log("Computer wins!");
+    } else if (result.includes("Player wins!")) {
+      userWins += 1;
+      roundCounter += 1;
+      console.log("Player wins!");
+    } else {
+      console.log("Tie!");
+    }
+  } while (roundCounter !== 5);
+
+  if (userWins > computerWins) {
+    console.log("User is the winner!");
+  } else {
+    console.log("Computer is the winner!");
+  }
+}
+
+playGame();
