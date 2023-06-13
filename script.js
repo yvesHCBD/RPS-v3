@@ -65,58 +65,94 @@ function playGame() {
   }
 }
 
-// playGame();
-//
-//
-
-function TestplayRound(playerChoice) {
-  let computerChoice = getComputerChoice().toUpperCase();
-
-  if (computerChoice == playerChoice) {
-    console.log(
-      "What a tie! Computer chose " +
-        computerChoice +
-        " and player chose " +
-        playerChoice
-    );
-  } else if (playerChoice == "ROCK" && computerChoice == "PAPER") {
-    console.log("Computer wins!");
-  } else if (playerChoice == "SCISSORS" && computerChoice == "ROCK") {
-    console.log("Computer wins!");
-  } else if (playerChoice == "PAPER" && computerChoice == "SCISSORS") {
-    console.log("Computer wins!");
-  } else if (playerChoice == "PAPER" && computerChoice == "ROCK") {
-    console.log("Player wins!");
-  } else if (playerChoice == "ROCK" && computerChoice == "SCISSORS") {
-    console.log("Player wins!");
-  } else if (playerChoice == "SCISSORS" && computerChoice == "PAPER") {
-    console.log("Player wins!");
-  }
-}
-
 const resultsContainer = document.querySelector(".results-container");
 const results = document.createElement("div");
 results.classList.add("displayResults");
 
 const rockbtn = document.querySelector(".rock-button");
-rockbtn.addEventListener("click", () => {
-  const resultText = playRound("ROCK");
-  results.textContent = resultText;
-  resultsContainer.appendChild(results);
-});
+// rockbtn.addEventListener("click", () => {
+//   const resultText = playRound("ROCK");
+//   results.textContent = resultText;
+//   resultsContainer.appendChild(results);
+// });
 
 const paperbtn = document.querySelector(".paper-button");
-paperbtn.addEventListener("click", () => {
-  const resultText = playRound("PAPER");
-  results.textContent = resultText;
-  resultsContainer.appendChild(results);
-});
+// paperbtn.addEventListener("click", () => {
+//   const resultText = playRound("PAPER");
+//   results.textContent = resultText;
+//   resultsContainer.appendChild(results);
+// });
 
 const scissorsbtn = document.querySelector(".scissor-button");
-scissorsbtn.addEventListener("click", () => {
-  const resultText = playRound("SCISSORS");
-  results.textContent = resultText;
-  resultsContainer.appendChild(results);
-});
+// scissorsbtn.addEventListener("click", () => {
+//   const resultText = playRound("SCISSORS");
+//   results.textContent = resultText;
+//   resultsContainer.appendChild(results);
+// });
 
 const displayWinner = document.createElement("div");
+
+const buttons = document.querySelectorAll("button");
+let resultText = "";
+
+let roundCounter = 1;
+let userWins = 0;
+let computerWins = 0;
+
+buttons.forEach((button) =>
+  button.addEventListener("click", (e) => {
+    if (e.target.innerText.includes("Rock")) {
+      resultText = playRound("ROCK");
+      results.textContent = resultText;
+      resultsContainer.appendChild(results);
+      console.log(`Round: ${roundCounter}`);
+      console.log(resultText);
+      if (resultText.includes("You Win!")) {
+        roundCounter += 1;
+        userWins += 1;
+        console.log(`Player's Score: ${userWins}`);
+      } else if (resultText.includes("Computer Wins!")) {
+        roundCounter += 1;
+        computerWins += 1;
+        console.log(`Computer's Score: ${computerWins}`);
+      } else return;
+    } else if (e.target.innerText.includes("Paper")) {
+      resultText = playRound("PAPER");
+      results.textContent = resultText;
+      resultsContainer.appendChild(results);
+      console.log(`Round: ${roundCounter}`);
+      console.log(resultText);
+      if (resultText.includes("You Win!")) {
+        roundCounter += 1;
+        userWins += 1;
+        console.log(`Player's Score: ${userWins}`);
+      } else if (resultText.includes("Computer Wins!")) {
+        roundCounter += 1;
+        computerWins += 1;
+        console.log(`Computer's Score: ${computerWins}`);
+      } else return;
+    } else {
+      resultText = playRound("SCISSORS");
+      results.textContent = resultText;
+      resultsContainer.appendChild(results);
+      console.log(`Round: ${roundCounter}`);
+      console.log(resultText);
+      if (resultText.includes("You Win!")) {
+        roundCounter += 1;
+        userWins += 1;
+        console.log(`Player's Score: ${userWins}`);
+      } else if (resultText.includes("Computer Wins!")) {
+        roundCounter += 1;
+        computerWins += 1;
+        console.log(`Computer's Score: ${computerWins}`);
+      } else return;
+    }
+    if (roundCounter == 6 && userWins > computerWins) {
+      console.log(
+        "Congratulations! You beat a computer at Rock Paper Scissors!"
+      );
+    } else if (roundCounter == 6 && computerWins > userWins) {
+      console.log("Congratulations! You suck at Rock Paper Scissors!");
+    }
+  })
+);
