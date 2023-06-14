@@ -43,14 +43,12 @@ function endGame() {
   if (roundCounter == 6 && userWins > computerWins) {
     results.textContent =
       "Congratulations! You beat a computer at Rock Paper Scissors!";
-    console.log("Congratulations! You beat a computer at Rock Paper Scissors!");
     resultsContainer.appendChild(results);
     roundCounter = 0;
     userWins = 0;
     computerWins = 0;
   } else if (roundCounter == 6 && computerWins > userWins) {
     results.textContent = "Congratulations! You suck at Rock Paper Scissors!";
-    console.log("Congratulations! You beat a computer at Rock Paper Scissors!");
     resultsContainer.appendChild(results);
     roundCounter = 1;
     userWins = 0;
@@ -70,6 +68,7 @@ let roundCounter = 1;
 let userWins = 0;
 let computerWins = 0;
 
+//TODO: can wrap a lot of this into own functions for better efficiency
 buttons.forEach((button) =>
   button.addEventListener("click", (e) => {
     if (e.target.innerText.includes("Rock")) {
