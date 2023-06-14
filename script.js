@@ -7,23 +7,18 @@ function getRandInt() {
 function getComputerChoice() {
   let choice = getRandInt();
   if (choice == 0) {
-    return "Rock";
+    return "ROCK";
   } else if (choice == 1) {
-    return "Paper";
+    return "PAPER";
   } else {
-    return "Scissors";
+    return "SCISSORS";
   }
 }
 
-function getPlayerChoice() {
-  let playerChoice = prompt("Choose: Rock, Paper, Scissors");
-  return playerChoice;
-}
-
 function playRound(playerChoice) {
-  let computerChoice = getComputerChoice().toUpperCase();
+  let computerChoice = getComputerChoice();
   if (computerChoice == playerChoice) {
-    return `What a tie! You both chose ${computerChoice}`;
+    return `What a tie! You both chose ${computerChoice}. Round is reset due to tie`;
   } else if (playerChoice == "ROCK" && computerChoice == "PAPER") {
     return `You chose ${playerChoice} while Computer chose ${computerChoice}. Computer Wins!`;
   } else if (playerChoice == "SCISSORS" && computerChoice == "ROCK") {
@@ -54,7 +49,7 @@ function playGame() {
       roundCounter += 1;
       console.log("Player wins!");
     } else {
-      console.log("Tie!");
+      console.log("Round is reset due to tie");
     }
   } while (roundCounter !== 5);
 
@@ -93,6 +88,29 @@ const scissorsbtn = document.querySelector(".scissor-button");
 const displayWinner = document.createElement("div");
 
 const buttons = document.querySelectorAll("button");
+
+function endGame() {
+  if (roundCounter == 6 && userWins > computerWins) {
+    results.textContent =
+      "Congratulations! You beat a computer at Rock Paper Scissors!";
+    console.log("Congratulations! You beat a computer at Rock Paper Scissors!");
+    resultsContainer.appendChild(results);
+    roundCounter = 0;
+    userWins = 0;
+    computerWins = 0;
+  } else if (roundCounter == 6 && computerWins > userWins) {
+    results.textContent = "Congratulations! You suck at Rock Paper Scissors!";
+    console.log("Congratulations! You beat a computer at Rock Paper Scissors!");
+    resultsContainer.appendChild(results);
+    roundCounter = 1;
+    userWins = 0;
+    computerWins = 0;
+  }
+}
+
+const displayCurrentScore = document.createElement("div");
+displayCurrentScore.classList.add("currentScoreContainer");
+
 let resultText = "";
 
 let roundCounter = 1;
@@ -110,11 +128,15 @@ buttons.forEach((button) =>
       if (resultText.includes("You Win!")) {
         roundCounter += 1;
         userWins += 1;
-        console.log(`Player's Score: ${userWins}`);
+        console.log(
+          `Player's Score: ${userWins} Computer's Score: ${computerWins}`
+        );
       } else if (resultText.includes("Computer Wins!")) {
         roundCounter += 1;
         computerWins += 1;
-        console.log(`Computer's Score: ${computerWins}`);
+        console.log(
+          `Player's Score: ${userWins} Computer's Score: ${computerWins}`
+        );
       } else return;
     } else if (e.target.innerText.includes("Paper")) {
       resultText = playRound("PAPER");
@@ -125,11 +147,15 @@ buttons.forEach((button) =>
       if (resultText.includes("You Win!")) {
         roundCounter += 1;
         userWins += 1;
-        console.log(`Player's Score: ${userWins}`);
+        console.log(
+          `Player's Score: ${userWins} Computer's Score: ${computerWins}`
+        );
       } else if (resultText.includes("Computer Wins!")) {
         roundCounter += 1;
         computerWins += 1;
-        console.log(`Computer's Score: ${computerWins}`);
+        console.log(
+          `Player's Score: ${userWins} Computer's Score: ${computerWins}`
+        );
       } else return;
     } else {
       resultText = playRound("SCISSORS");
@@ -140,19 +166,19 @@ buttons.forEach((button) =>
       if (resultText.includes("You Win!")) {
         roundCounter += 1;
         userWins += 1;
-        console.log(`Player's Score: ${userWins}`);
+        console.log(
+          `Player's Score: ${userWins} Computer's Score: ${computerWins}`
+        );
       } else if (resultText.includes("Computer Wins!")) {
         roundCounter += 1;
         computerWins += 1;
-        console.log(`Computer's Score: ${computerWins}`);
+        console.log(
+          `Player's Score: ${userWins} Computer's Score: ${computerWins}`
+        );
       } else return;
     }
-    if (roundCounter == 6 && userWins > computerWins) {
-      console.log(
-        "Congratulations! You beat a computer at Rock Paper Scissors!"
-      );
-    } else if (roundCounter == 6 && computerWins > userWins) {
-      console.log("Congratulations! You suck at Rock Paper Scissors!");
-    }
+    endGame();
   })
 );
+
+//OH MY GOD I THINK I'VE ACTUALLY COMPLETED THIS PROPERLY WOOOOOOO JUN 13 @ 4:11 AM
