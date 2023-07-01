@@ -32,6 +32,9 @@ function playRound(playerChoice) {
   }
 }
 
+// Some HTML elements are created through javascript as a way to test my ability
+// of javascript basics
+
 const resultsContainer = document.querySelector(".results-container");
 const results = document.createElement("div");
 results.classList.add("displayResults");
